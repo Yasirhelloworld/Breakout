@@ -72,7 +72,21 @@ public class Breakout extends GraphicsProgram {
 	 * RED, ORANGE, YELLOW, GREEN, CYAN
 	 */
 	private void setUpGame() {
-		drawRow(BRICK_X_OFFSET, BRICK_Y_OFFSET, Color.red);
+		for (int i = 0; i < NBRICK_ROWS; i++) {
+			Color brickColor;
+			if (i < 2) {
+				brickColor = Color.red;
+			} else if (i < 4) {
+				brickColor = Color.orange;
+			} else if (i < 6) {
+				brickColor = Color.yellow;
+			} else if (i < 8) {
+				brickColor = Color.green;
+			} else {
+				brickColor = Color.cyan;
+			}
+			drawRow(BRICK_X_OFFSET, (BRICK_Y_OFFSET + i * BRICK_HEIGHT), brickColor);
+		}
 	}
 	
 	/** 
