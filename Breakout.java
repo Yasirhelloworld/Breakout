@@ -85,7 +85,7 @@ public class Breakout extends GraphicsProgram {
 			} else {
 				brickColor = Color.cyan;
 			}
-			drawRow(BRICK_X_OFFSET, (BRICK_Y_OFFSET + i * BRICK_HEIGHT), brickColor);
+			drawRow(BRICK_X_OFFSET, (BRICK_Y_OFFSET + i * (BRICK_SEP + BRICK_HEIGHT)), brickColor);
 		}
 	}
 	
