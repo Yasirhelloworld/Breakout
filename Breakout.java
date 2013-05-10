@@ -69,15 +69,15 @@ public class Breakout extends GraphicsProgram {
 	 * RED, ORANGE, YELLOW, GREEN, CYAN
 	 */
 	private void setUpGame() {
-		
+		drawRow(0, BRICK_Y_OFFSET, Color.red);
 	}
 	
 	/** 
 	 * Runs the main game program
 	 */
 	private void runGame(){
-		drawRow(0, BRICK_Y_OFFSET, Color.red);
-	}
+		// game code goes here
+		}
 	/** 
 	 * Draws a row of bricks
 	 * 
