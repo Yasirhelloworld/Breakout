@@ -76,7 +76,20 @@ public class Breakout extends GraphicsProgram {
 	 * Runs the main game program
 	 */
 	private void runGame(){
-		
+		drawRow(0, BRICK_Y_OFFSET, Color.red);
 	}
-
+	/** 
+	 * Draws a row of bricks
+	 * 
+	 * @param x origin of row (left)
+	 * @param y origin of row (top)
+	 * @param color of row
+	 */
+	private void drawRow(int x, int y, Color color) {
+		for (int i = 0; i < NBRICKS_PER_ROW; i++) {
+			GRect brick = new GRect((x + i * (BRICK_WIDTH + BRICK_SEP)), y, BRICK_WIDTH, BRICK_HEIGHT);
+			brick.setFilled(true);
+			brick.setFillColor(color);
+		}
+	}
 }
