@@ -63,14 +63,20 @@ public class Breakout extends GraphicsProgram {
 		setUpGame();
 		runGame();
 	}
+	
 	/** sets up the game board in the following manner:
 	 * 1) Places 10 rows of bricks near the top of the window, colored from top to bottom:
 	 * RED, ORANGE, YELLOW, GREEN, CYAN
 	 */
 	private void setUpGame() {
-		// set dimensions of window
-		setWidth();
-		setHeight();
+		
+	}
+	
+	/** 
+	 * Runs the main game program
+	 */
+	private void runGame(){
+		
 	}
 
 }
