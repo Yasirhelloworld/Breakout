@@ -107,7 +107,7 @@ public class Breakout extends GraphicsProgram {
 			GRect brick = new GRect((x + i * (BRICK_WIDTH + BRICK_SEP)), y, BRICK_WIDTH, BRICK_HEIGHT);
 			brick.setFilled(true);
 			brick.setFillColor(color);
-			brick.setColor(color); // I don't like the borders
+//			brick.setColor(color); // uncomment to remove borders
 			add(brick);
 		}
 	}
