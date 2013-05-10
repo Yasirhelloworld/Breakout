@@ -1,8 +1,6 @@
 /*
  * File: Breakout.java
  * -------------------
- * Name:
- * Section Leader:
  * 
  * This file will eventually implement the game of Breakout.
  */
@@ -62,7 +60,17 @@ public class Breakout extends GraphicsProgram {
 /* Method: run() */
 /** Runs the Breakout program. */
 	public void run() {
-		/* You fill this in, along with any subsidiary methods */
+		setUpGame();
+		runGame();
+	}
+	/** sets up the game board in the following manner:
+	 * 1) Places 10 rows of bricks near the top of the window, colored from top to bottom:
+	 * RED, ORANGE, YELLOW, GREEN, CYAN
+	 */
+	private void setUpGame() {
+		// set dimensions of window
+		setWidth();
+		setHeight();
 	}
 
 }
