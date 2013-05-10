@@ -55,7 +55,7 @@ public class Breakout extends GraphicsProgram {
 	private static final int BRICK_Y_OFFSET = 70;
 	
 /** Offset of the leftmost brick column from the left */
-	private static final int BRICK_X_OFFSET = (WIDTH - (NBRICKS_PER_ROW * (BRICK_WIDTH + BRICK_SEP))) / 2; // this depends on how BRICK_WIDTH is calculated
+	private static final int BRICK_X_OFFSET = 1; // this depends on how BRICK_WIDTH is calculated
 
 /** Number of turns */
 	private static final int NTURNS = 3;
