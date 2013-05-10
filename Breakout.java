@@ -53,6 +53,9 @@ public class Breakout extends GraphicsProgram {
 
 /** Offset of the top brick row from the top */
 	private static final int BRICK_Y_OFFSET = 70;
+	
+/** Offset of the leftmost brick column from the left */
+	private static final int BRICK_X_OFFSET = BRICK_SEP / 2; // this depends on how BRICK_WIDTH is calculated
 
 /** Number of turns */
 	private static final int NTURNS = 3;
@@ -69,7 +72,7 @@ public class Breakout extends GraphicsProgram {
 	 * RED, ORANGE, YELLOW, GREEN, CYAN
 	 */
 	private void setUpGame() {
-		drawRow(0, BRICK_Y_OFFSET, Color.red);
+		drawRow(BRICK_X_OFFSET, BRICK_Y_OFFSET, Color.red);
 	}
 	
 	/** 
