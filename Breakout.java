@@ -86,11 +86,11 @@ public class Breakout extends GraphicsProgram {
 	 * @param color of row
 	 */
 	private void drawRow(int x, int y, Color color) {
-		println("drawRow got called");
 		for (int i = 0; i < NBRICKS_PER_ROW; i++) {
 			GRect brick = new GRect((x + i * (BRICK_WIDTH + BRICK_SEP)), y, BRICK_WIDTH, BRICK_HEIGHT);
 			brick.setFilled(true);
 			brick.setFillColor(color);
+			add(brick);
 		}
 	}
 }
