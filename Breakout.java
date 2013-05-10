@@ -16,7 +16,7 @@ import java.awt.event.*;
 public class Breakout extends GraphicsProgram {
 
 /** Width and height of application window in pixels */
-	public static final int APPLICATION_WIDTH = 410;
+	public static final int APPLICATION_WIDTH = 400;
 	public static final int APPLICATION_HEIGHT = 600;
 
 /** Dimensions of game board
@@ -33,7 +33,7 @@ public class Breakout extends GraphicsProgram {
 	private static final int PADDLE_Y_OFFSET = 30;
 
 /** Number of bricks per row */
-	private static final int NBRICKS_PER_ROW = 10;
+	private static final int NBRICKS_PER_ROW = 1;
 
 /** Number of rows of bricks */
 	private static final int NBRICK_ROWS = 10;
