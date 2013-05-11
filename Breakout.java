@@ -150,17 +150,46 @@ public class Breakout extends GraphicsProgram {
 			if (ballHitHorizontalWall()) {
 				vy = -vy;
 			}
-			// bounce if we hit a brick
-			for (int i = 0; i < 4; i++) {
-				if (getElementAt(BALL.getX(), BALL.getY()) != null) {
-					println("There's an element at: " + BALL.getX() + " , " + BALL.getY());
-				}
+			// bounce if we hit an object
+			GObject collider = getCollidingObject();
+			if (collider == PADDLE){
+				vy = -vy;
+			} else if (collider != null) { // we hit a brick
+				vy = -vy;
+				remove(collider);
 			}
 		}
 	}
 	
 	/**
+	 * Iterate over the four corners of the ball hit box and see if 
+	 * we hit an object
 	 * 
+	 * @return GObject that we collided with. If none, return null
+	 */
+	private GObject getCollidingObject() {
+		// grab elements at all four corners
+		GObject topLeftElement = getElementAt(BALL.getX(), BALL.getY());
+		GObject topRightElement = getElementAt((BALL.getX() + BALL_RADIUS * 2), BALL.getY());
+		GObject bottomLeftElement = getElementAt(BALL.getX(), (BALL.getY() + BALL_RADIUS * 2));
+		GObject bottomRightElement = getElementAt((BALL.getX() + BALL_RADIUS * 2), (BALL.getY() + BALL_RADIUS * 2));
+		// iterate clockwise, if we encounter an element return it
+		if (topLeftElement != null) {
+			return topLeftElement;
+		} else if (topRightElement != null) {
+			return topRightElement;
+		} else if (bottomRightElement != null) {
+			return bottomRightElement;
+		} else if (bottomLeftElement != null) {
+			return bottomLeftElement;
+		} else {
+			return null;
+		}
+	}
+	/**
+	 * Did we hit a vertical wall?
+	 * 
+	 * @param true or false
 	 */
 	private boolean ballHitVerticalWall() {
 		if (BALL.getX() <= 0 || BALL.getX() >= (APPLICATION_WIDTH - (BALL_RADIUS * 2))) {
@@ -171,7 +200,9 @@ public class Breakout extends GraphicsProgram {
 	}
 	
 	/**
+	 * Did we hit a side wall?
 	 * 
+	 * @param true or false
 	 */
 	private boolean ballHitHorizontalWall() {
 		if (BALL.getY() <= 0 || BALL.getY() >= (APPLICATION_HEIGHT - (BALL_RADIUS * 2))) {
