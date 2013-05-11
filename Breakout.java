@@ -72,6 +72,7 @@ public class Breakout extends GraphicsProgram {
 /** Initialise ball object */
 	private GOval BALL;
 	private double vx, vy; //velocity components of ball
+	private double BALL_VY_INITIAL = 5.0; //initial y velocity of ball
 	
 /** Ball initial position */
 	private int BALL_X_INITIAL = APPLICATION_WIDTH / 2;
@@ -135,7 +136,7 @@ public class Breakout extends GraphicsProgram {
 		// initialise ball object
 		initBall(BALL_X_INITIAL, BALL_Y_INITIAL);
 		// kick the ball off with some initial velocity
-		vy = 2.0;
+		vy = BALL_VY_INITIAL;
 		vx = rgen.nextDouble(1.0, 3.0);
 		if (rgen.nextBoolean(0.5)) vx = -vx;
 		
