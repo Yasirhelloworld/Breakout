@@ -298,6 +298,7 @@ public class Breakout extends GraphicsProgram {
 		String message = "GAME OVER";
 		GRect messageBox = new GRect((APPLICATION_WIDTH - MESSAGE_WIDTH) / 2, (APPLICATION_HEIGHT - MESSAGE_HEIGHT) / 2, MESSAGE_WIDTH, MESSAGE_HEIGHT);
 		messageBox.setFillColor(Color.LIGHT_GRAY);
+		messageBox.setFilled(true);
 		add(messageBox);
 		GLabel messageText = new GLabel(message);
 		double xLabel = (APPLICATION_WIDTH - messageText.getWidth()) / 2;
