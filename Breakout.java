@@ -61,7 +61,7 @@ public class Breakout extends GraphicsProgram {
 	private static final int NTURNS = 3;
 	
 /** Pause time between updating animation frames */
-	private static final int PAUSE_TIME = 2; // in ms
+	private static final int PAUSE_TIME = 20; // in ms
 	
 /** Initialise paddle object */
 	private GRect PADDLE;
