@@ -67,10 +67,7 @@ public class Breakout extends GraphicsProgram {
 		runGame();
 	}
 	
-	/** sets up the game board in the following manner:
-	 * 1) Places 10 rows of bricks near the top of the window, colored from top to bottom:
-	 * RED, ORANGE, YELLOW, GREEN, CYAN
-	 */
+	/** sets up the game board with colored bricks */
 	private void setUpGame() {
 		for (int i = 0; i < NBRICK_ROWS; i++) {
 			Color brickColor;
@@ -94,7 +91,9 @@ public class Breakout extends GraphicsProgram {
 	 */
 	private void runGame(){
 		// game code goes here
+		drawPaddle();
 		}
+	
 	/** 
 	 * Draws a row of bricks
 	 * 
@@ -110,5 +109,12 @@ public class Breakout extends GraphicsProgram {
 //			brick.setColor(color); // uncomment to remove borders
 			add(brick);
 		}
+	}
+	/** Draw paddle centered at coordinate x (y is fixed)
+	 * 
+	 * @param x coordinate of paddle 
+	 */
+	private void drawPaddle(double x) {
+		
 	}
 }
