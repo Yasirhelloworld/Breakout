@@ -134,6 +134,7 @@ public class Breakout extends GraphicsProgram {
 			if (ballHitTopWall()) {
 				vy = -vy;
 			} else if (ballHitBottomWall()){
+				vy = -vy;
 //				println("YOU LOSE");
 //				break;
 			}
