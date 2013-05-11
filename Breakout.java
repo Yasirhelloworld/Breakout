@@ -144,12 +144,21 @@ public class Breakout extends GraphicsProgram {
 				showMessage("GAME OVER");
 				break;
 			}
-			// bounce if we hit an object
-			GObject collider = getCollidingObject();
-			if (collider == PADDLE){
-				vy = -vy;
+			// bounce upwards if we hit an object below
+			GObject collider = getCollidingObjectBottom();
+			if (collider == PADDLE) {
+				vy = Math.abs(vy);
 			} else if (collider != null) { // we hit a brick
-				vy = -vy;
+				vy = Math.abs(vy);
+				remove(collider);
+				nBricks -= 1;
+			}
+			// bounce downwards if we hit an object above
+			collider = getCollidingObjectTop();
+			if (collider == PADDLE) {
+				vy = -Math.abs(vy);
+			} else if (collider != null) { // we hit a brick
+				vy = -Math.abs(vy);
 				remove(collider);
 				nBricks -= 1;
 			}
@@ -161,23 +170,17 @@ public class Breakout extends GraphicsProgram {
 	}
 	
 	/**
-	 * Iterate over the four corners of the ball hit box and see if 
+	 * Iterate over the bottom two corners of the ball hit box and see if 
 	 * we hit an object
 	 * 
 	 * @return GObject that we collided with. If none, return null
 	 */
-	private GObject getCollidingObject() {
+	private GObject getCollidingObjectBottom() {
 		// grab elements at all four corners
-		GObject topLeftElement = getElementAt(BALL.getX(), BALL.getY());
-		GObject topRightElement = getElementAt((BALL.getX() + BALL_RADIUS * 2), BALL.getY());
 		GObject bottomLeftElement = getElementAt(BALL.getX(), (BALL.getY() + BALL_RADIUS * 2));
 		GObject bottomRightElement = getElementAt((BALL.getX() + BALL_RADIUS * 2), (BALL.getY() + BALL_RADIUS * 2));
 		// iterate clockwise, if we encounter an element return it
-		if (topLeftElement != null) {
-			return topLeftElement;
-		} else if (topRightElement != null) {
-			return topRightElement;
-		} else if (bottomRightElement != null) {
+		if (bottomRightElement != null) {
 			return bottomRightElement;
 		} else if (bottomLeftElement != null) {
 			return bottomLeftElement;
@@ -185,6 +188,27 @@ public class Breakout extends GraphicsProgram {
 			return null;
 		}
 	}
+	
+	/**
+	 * Iterate over the top two corners of the ball hit box and see if 
+	 * we hit an object
+	 * 
+	 * @return
+	 */
+	private GObject getCollidingObjectTop() {
+		// grab elements at all four corners
+		GObject topLeftElement = getElementAt(BALL.getX(), BALL.getY());
+		GObject topRightElement = getElementAt((BALL.getX() + BALL_RADIUS * 2), BALL.getY());
+		// iterate clockwise, if we encounter an element return it
+		if (topLeftElement != null) {
+			return topLeftElement;
+		} else if (topRightElement != null) {
+			return topRightElement;
+		} else {
+			return null;
+		}
+	}
+	
 	/**
 	 * Did we hit the top wall?
 	 * 
