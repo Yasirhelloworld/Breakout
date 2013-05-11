@@ -66,16 +66,24 @@ public class Breakout extends GraphicsProgram {
 /** paddle y origin */
 	private int PADDLE_Y_ORIGIN = APPLICATION_HEIGHT - PADDLE_Y_OFFSET - PADDLE_HEIGHT / 2;
 	
+/** Initialise ball object */
+	private GOval BALL;
+	private double vx, vy; //velocity components of ball
+	
+/** Ball initial position */
+	private int BALL_X_INITIAL = APPLICATION_WIDTH / 2;
+	private int BALL_Y_INITIAL = APPLICATION_HEIGHT / 2;
+	
 /* Method: run() */
 /** Runs the Breakout program. */
 	public void run() {
-		addMouseListeners();
 		setUpGame();
 		runGame();
 	}
 	
 	/** sets up the game board with colored bricks */
 	private void setUpGame() {
+		// draw bricks
 		for (int i = 0; i < NBRICK_ROWS; i++) {
 			Color brickColor;
 			if (i < 2) {
@@ -91,9 +99,10 @@ public class Breakout extends GraphicsProgram {
 			}
 			drawRow(BRICK_X_OFFSET, (BRICK_Y_OFFSET + i * (BRICK_SEP + BRICK_HEIGHT)), brickColor);
 		}
+		// set up mouse listening
+		addMouseListeners();
 		// initialise and add paddle
-		initPaddle((APPLICATION_WIDTH / 2), (APPLICATION_HEIGHT - PADDLE_Y_OFFSET));
-		add(this.PADDLE);
+		initPaddle(APPLICATION_WIDTH / 2);
 	}
 	
 	/** 
@@ -118,15 +127,39 @@ public class Breakout extends GraphicsProgram {
 	 */
 	private void runGame() {
 		// game code goes here
+		initBall(APPLICATION_WIDTH / 2, APPLICATION_HEIGHT / 2, 1, 1);
+	}
+	
+	/** 
+	 * Initialises ball object at:
+	 * 
+	 * @param x
+	 * @param y
+	 * 
+	 * (coordinates describe center of ball)
+	 * 
+	 * with velocity
+	 * 
+	 * @param vx
+	 * @param vy
+	 * 
+	 */
+	private void initBall(int x, int y, double vx, double vy) {
+		int x0 = x - BALL_RADIUS;
+		int y0 = y - BALL_RADIUS;
+		this.BALL = new GOval(BALL_RADIUS, BALL_RADIUS);
+		BALL.setLocation(x0, y0);
+		BALL.setFilled(true);
+		BALL.setFillColor(Color.black);
+		add(this.BALL);
 	}
 	
 	/**
-	 * Listen for mouse movements and move paddle appropriately
+	 * Listens for mouse movements and move paddle appropriately
 	 * Paddle movement is restricted by bounds of application window
 	 */
 	public void mouseMoved(MouseEvent e) {
 		int x;
-		
 		/* set bounds on paddle movement so it's edges cannot leave the screen */
 		if (e.getX() < PADDLE_WIDTH / 2) {
 			x = PADDLE_WIDTH / 2;
@@ -136,19 +169,20 @@ public class Breakout extends GraphicsProgram {
 			x = e.getX();
 		}
 		this.PADDLE.setLocation((x - PADDLE_WIDTH / 2), PADDLE_Y_ORIGIN);
-
 	}
 		
-	/** instantiate paddle object at coordinates x, y
+	/** 
+	 * Initialises paddle object at coordinates x, y
 	 * 
 	 * @param x coordinate of paddle 
 	 * @param y coordinate of paddle
 	 */
-	private void initPaddle(int x, int y) {
+	private void initPaddle(int x) {
 		int x0 = x - PADDLE_WIDTH / 2;
 		this.PADDLE = new GRect(PADDLE_WIDTH, PADDLE_HEIGHT);
 		PADDLE.setLocation(x0, PADDLE_Y_ORIGIN);
 		PADDLE.setFilled(true);
 		PADDLE.setFillColor(Color.black);
+		add(this.PADDLE);
 	}
 }
