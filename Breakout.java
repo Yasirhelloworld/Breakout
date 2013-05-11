@@ -147,18 +147,18 @@ public class Breakout extends GraphicsProgram {
 			// bounce upwards if we hit an object below
 			GObject collider = getCollidingObjectBottom();
 			if (collider == PADDLE) {
-				vy = Math.abs(vy);
+				vy = -Math.abs(vy);
 			} else if (collider != null) { // we hit a brick
-				vy = Math.abs(vy);
+				vy = -Math.abs(vy);
 				remove(collider);
 				nBricks -= 1;
 			}
 			// bounce downwards if we hit an object above
 			collider = getCollidingObjectTop();
 			if (collider == PADDLE) {
-				vy = -Math.abs(vy);
+				vy = Math.abs(vy);
 			} else if (collider != null) { // we hit a brick
-				vy = -Math.abs(vy);
+				vy = Math.abs(vy);
 				remove(collider);
 				nBricks -= 1;
 			}
