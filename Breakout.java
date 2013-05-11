@@ -91,7 +91,7 @@ public class Breakout extends GraphicsProgram {
 	 */
 	private void runGame(){
 		// game code goes here
-		drawPaddle();
+		drawPaddle(30);
 		}
 	
 	/** 
@@ -115,6 +115,9 @@ public class Breakout extends GraphicsProgram {
 	 * @param x coordinate of paddle 
 	 */
 	private void drawPaddle(double x) {
-		
+		double x0 = x - PADDLE_WIDTH / 2;
+		double y0 = APPLICATION_HEIGHT - PADDLE_Y_OFFSET - (PADDLE_HEIGHT / 2);
+		GRect paddle = new GRect(x0, y0, PADDLE_WIDTH, PADDLE_HEIGHT);
+		add(paddle);
 	}
 }
