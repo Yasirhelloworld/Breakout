@@ -211,7 +211,7 @@ public class Breakout extends GraphicsProgram {
 	 * @param true or false
 	 */
 	private boolean ballHitVerticalWall() {
-		if (BALL.getX() <= 0 || BALL.getX() >= (APPLICATION_HEIGHT - (BALL_RADIUS * 2))) {
+		if (BALL.getX() <= 0 || BALL.getX() >= (APPLICATION_WIDTH - (BALL_RADIUS * 2))) {
 			return true;
 		} else {
 			return false;
