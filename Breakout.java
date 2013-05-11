@@ -87,14 +87,6 @@ public class Breakout extends GraphicsProgram {
 	}
 	
 	/** 
-	 * Runs the main game program
-	 */
-	private void runGame(){
-		// game code goes here
-		drawPaddle(10);
-		}
-	
-	/** 
 	 * Draws a row of bricks
 	 * 
 	 * @param x origin of row (left)
@@ -110,13 +102,29 @@ public class Breakout extends GraphicsProgram {
 			add(brick);
 		}
 	}
+	
+	/** 
+	 * Runs the main game program
+	 */
+	private void runGame() {
+		// game code goes here
+		drawPaddle(100);
+	}
+	
+	/**
+	 * Listen for mouse movements
+	 */
+	public void mousePressed(MouseEvent e) {
+		drawPaddle(e.getX());
+	}
+		
 	/** Draw paddle centered at coordinate x (y is fixed)
 	 * 
 	 * @param x coordinate of paddle 
 	 */
-	private void drawPaddle(double x) {
-		double x0 = x - PADDLE_WIDTH / 2;
-		double y0 = APPLICATION_HEIGHT - PADDLE_Y_OFFSET - (PADDLE_HEIGHT / 2);
+	private void drawPaddle(int x) {
+		int x0 = x - PADDLE_WIDTH / 2;
+		int y0 = APPLICATION_HEIGHT - PADDLE_Y_OFFSET - (PADDLE_HEIGHT / 2);
 		GRect paddle = new GRect(x0, y0, PADDLE_WIDTH, PADDLE_HEIGHT);
 		paddle.setFilled(true);
 		paddle.setFillColor(Color.black);
