@@ -113,23 +113,6 @@ public class Breakout extends GraphicsProgram {
 	}
 	
 	/** 
-	 * Draws a row of bricks
-	 * 
-	 * @param x origin of row (left)
-	 * @param y origin of row (top)
-	 * @param color of row
-	 */
-	private void drawRow(int x, int y, Color color) {
-		for (int i = 0; i < NBRICKS_PER_ROW; i++) {
-			GRect brick = new GRect((x + i * (BRICK_WIDTH + BRICK_SEP)), y, BRICK_WIDTH, BRICK_HEIGHT);
-			brick.setFilled(true);
-			brick.setFillColor(color);
-//			brick.setColor(color); // uncomment to remove borders
-			add(brick);
-		}
-	}
-	
-	/** 
 	 * Runs the main game program
 	 */
 	private void runGame() {
@@ -139,7 +122,7 @@ public class Breakout extends GraphicsProgram {
 		vy = BALL_VY_INITIAL;
 		vx = rgen.nextDouble(1.0, 3.0);
 		if (rgen.nextBoolean(0.5)) vx = -vx;
-		
+		int nBricks = NBRICKS_PER_ROW * NBRICK_ROWS;
 		/* Main animation loop */
 		while (true) {
 			BALL.move(vx, vy);
@@ -148,8 +131,11 @@ public class Breakout extends GraphicsProgram {
 			if (ballHitVerticalWall()) {
 				vx = -vx;
 			}
-			if (ballHitHorizontalWall()) {
+			if (ballHitTopWall()) {
 				vy = -vy;
+			} else if (ballHitBottomWall()){
+				println("YOU LOSE");
+				break;
 			}
 			// bounce if we hit an object
 			GObject collider = getCollidingObject();
@@ -158,6 +144,11 @@ public class Breakout extends GraphicsProgram {
 			} else if (collider != null) { // we hit a brick
 				vy = -vy;
 				remove(collider);
+				nBricks -= 1;
+			}
+			if (nBricks == 0) {
+				println("YOU WIN");
+				break;
 			}
 		}
 	}
@@ -188,12 +179,25 @@ public class Breakout extends GraphicsProgram {
 		}
 	}
 	/**
-	 * Did we hit a vertical wall?
+	 * Did we hit the top wall?
 	 * 
 	 * @param true or false
 	 */
-	private boolean ballHitVerticalWall() {
-		if (BALL.getX() <= 0 || BALL.getX() >= (APPLICATION_WIDTH - (BALL_RADIUS * 2))) {
+	private boolean ballHitTopWall() {
+		if (BALL.getY() <= 0) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+	
+	/**
+	 * Did we hit the bottom?
+	 * 
+	 * @param true or false
+	 */
+	private boolean ballHitBottomWall() {
+		if (BALL.getY() >= (APPLICATION_HEIGHT - (BALL_RADIUS * 2))) {
 			return true;
 		} else {
 			return false;
@@ -205,8 +209,8 @@ public class Breakout extends GraphicsProgram {
 	 * 
 	 * @param true or false
 	 */
-	private boolean ballHitHorizontalWall() {
-		if (BALL.getY() <= 0 || BALL.getY() >= (APPLICATION_HEIGHT - (BALL_RADIUS * 2))) {
+	private boolean ballHitVerticalWall() {
+		if (BALL.getX() <= 0 || BALL.getY() >= (APPLICATION_HEIGHT - (BALL_RADIUS * 2))) {
 			return true;
 		} else {
 			return false;
@@ -262,5 +266,22 @@ public class Breakout extends GraphicsProgram {
 		PADDLE.setFilled(true);
 		PADDLE.setFillColor(Color.black);
 		add(this.PADDLE);
+	}
+}
+
+/** 
+ * Draws a row of bricks
+ * 
+ * @param x origin of row (left)
+ * @param y origin of row (top)
+ * @param color of row
+ */
+private void drawRow(int x, int y, Color color) {
+	for (int i = 0; i < NBRICKS_PER_ROW; i++) {
+		GRect brick = new GRect((x + i * (BRICK_WIDTH + BRICK_SEP)), y, BRICK_WIDTH, BRICK_HEIGHT);
+		brick.setFilled(true);
+		brick.setFillColor(color);
+//		brick.setColor(color); // uncomment to remove borders
+		add(brick);
 	}
 }
