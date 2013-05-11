@@ -138,10 +138,39 @@ public class Breakout extends GraphicsProgram {
 		vy = 2.0;
 		vx = rgen.nextDouble(1.0, 3.0);
 		if (rgen.nextBoolean(0.5)) vx = -vx;
-		// enter main animation loop
+		
+		/* Main animation loop */
 		while (true) {
 			BALL.move(vx, vy);
 			pause(PAUSE_TIME);
+			if (ballHitVerticalWall()) {
+				vx = -vx;
+			}
+			if (ballHitHorizontalWall()) {
+				vy = -vy;
+			}
+		}
+	}
+	
+	/**
+	 * 
+	 */
+	private boolean ballHitVerticalWall() {
+		if (BALL.getY() <= BALL_RADIUS || BALL.getY() >= (APPLICATION_HEIGHT - BALL_RADIUS)) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+	
+	/**
+	 * 
+	 */
+	private boolean ballHitHorizontalWall() {
+		if (BALL.getX() <= BALL_RADIUS || BALL.getX() >= (APPLICATION_WIDTH - BALL_RADIUS)) {
+			return true;
+		} else {
+			return false;
 		}
 	}
 	
