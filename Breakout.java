@@ -91,7 +91,7 @@ public class Breakout extends GraphicsProgram {
 	 */
 	private void runGame(){
 		// game code goes here
-		drawPaddle(100);
+		drawPaddle(10);
 		}
 	
 	/** 
