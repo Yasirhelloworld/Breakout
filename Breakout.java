@@ -60,6 +60,9 @@ public class Breakout extends GraphicsProgram {
 /** Number of turns */
 	private static final int NTURNS = 3;
 	
+/** Pause time between updating animation frames */
+	private static final int PAUSE_TIME = 20; // in ms
+	
 /** Initialise paddle object */
 	private GRect PADDLE;
 	
@@ -135,6 +138,11 @@ public class Breakout extends GraphicsProgram {
 		vy = 2.0;
 		vx = rgen.nextDouble(1.0, 3.0);
 		if (rgen.nextBoolean(0.5)) vx = -vx;
+		// enter main animation loop
+		while (true) {
+			BALL.move(vx, vy);
+			pause(PAUSE_TIME);
+		}
 	}
 	
 	/** 
