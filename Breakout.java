@@ -82,6 +82,7 @@ public class Breakout extends GraphicsProgram {
 	private int MESSAGE_WIDTH = 200;
 	private int MESSAGE_HEIGHT = 100;
 	private Font MESSAGE_FONT = new Font("Sans", Font.PLAIN, 32);
+	private int MESSAGE_FUDGE_FACTOR = -5; // a value in pixels that adjusts the y position of the displayed message (to make it look more aesthetically pleasing)
 	
 /** Instantiate random number generator */
 	private RandomGenerator rgen = RandomGenerator.getInstance();
@@ -302,7 +303,7 @@ public class Breakout extends GraphicsProgram {
 		GLabel messageText = new GLabel(message);
 		messageText.setFont(MESSAGE_FONT);
 		double xLabel = (APPLICATION_WIDTH - messageText.getWidth()) / 2;
-		double yLabel = (APPLICATION_HEIGHT + messageText.getHeight()) / 2 - 5; // the 5 is a fudge factor to make it look more centered
+		double yLabel = (APPLICATION_HEIGHT + messageText.getHeight()) / 2 + MESSAGE_FUDGE_FACTOR; // the fudge factor is to make it look more centered
 		messageText.setLocation(xLabel, yLabel);
 		add(messageText);
 	}
