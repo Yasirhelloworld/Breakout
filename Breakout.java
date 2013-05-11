@@ -128,14 +128,14 @@ public class Breakout extends GraphicsProgram {
 		int x;
 		
 		/* set bounds on paddle movement so it's edges cannot leave the screen */
-		if (e.getX() < PADDLE_WIDTH / 2) {
-			x = PADDLE_WIDTH / 2;
-		} else if (e.getX() > (APPLICATION_WIDTH - PADDLE_WIDTH / 2)) {
-			x = APPLICATION_WIDTH - PADDLE_WIDTH / 2;
-		} else {
-			x = e.getX();
-		}
-		this.PADDLE.setLocation((x - PADDLE_WIDTH / 2), PADDLE_Y_ORIGIN);
+//		if (e.getX() < PADDLE_WIDTH / 2) {
+//			x = PADDLE_WIDTH / 2;
+//		} else if (e.getX() > (APPLICATION_WIDTH - PADDLE_WIDTH / 2)) {
+//			x = APPLICATION_WIDTH - PADDLE_WIDTH / 2;
+//		} else {
+//			x = e.getX();
+//		}
+		this.PADDLE.setLocation((e.getX() - PADDLE_WIDTH / 2), PADDLE_Y_ORIGIN);
 
 	}
 		
