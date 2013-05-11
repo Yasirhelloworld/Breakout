@@ -81,7 +81,7 @@ public class Breakout extends GraphicsProgram {
 /** Message box dimensions and font style */
 	private int MESSAGE_WIDTH = 200;
 	private int MESSAGE_HEIGHT = 100;
-	private Font MESSAGE_FONT = new Font("Sans", Font.PLAIN, 72);
+	private Font MESSAGE_FONT = new Font("Sans", Font.PLAIN, 32);
 	
 /** Instantiate random number generator */
 	private RandomGenerator rgen = RandomGenerator.getInstance();
@@ -302,7 +302,7 @@ public class Breakout extends GraphicsProgram {
 		GLabel messageText = new GLabel(message);
 		messageText.setFont(MESSAGE_FONT);
 		double xLabel = (APPLICATION_WIDTH - messageText.getWidth()) / 2;
-		double yLabel = (APPLICATION_HEIGHT + messageText.getHeight()) / 2;
+		double yLabel = (APPLICATION_HEIGHT + messageText.getHeight()) / 2 - 5; //fudge factor to make it look neater
 		messageText.setLocation(xLabel, yLabel);
 		add(messageText);
 	}
