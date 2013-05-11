@@ -72,7 +72,7 @@ public class Breakout extends GraphicsProgram {
 /** Initialise ball object */
 	private GOval BALL;
 	private double vx, vy; //velocity components of ball
-	private double BALL_VY_INITIAL = 5.0; //initial y velocity of ball
+	private double BALL_VY_INITIAL = 500.0; //initial y velocity of ball
 	
 /** Ball initial position */
 	private int BALL_X_INITIAL = APPLICATION_WIDTH / 2;
@@ -134,8 +134,8 @@ public class Breakout extends GraphicsProgram {
 			if (ballHitTopWall()) {
 				vy = -vy;
 			} else if (ballHitBottomWall()){
-				println("YOU LOSE");
-				break;
+//				println("YOU LOSE");
+//				break;
 			}
 			// bounce if we hit an object
 			GObject collider = getCollidingObject();
