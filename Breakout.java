@@ -90,10 +90,10 @@ public class Breakout extends GraphicsProgram {
 				brickColor = Color.cyan;
 			}
 			drawRow(BRICK_X_OFFSET, (BRICK_Y_OFFSET + i * (BRICK_SEP + BRICK_HEIGHT)), brickColor);
+		}
 		// initialise and add paddle
 		initPaddle((APPLICATION_WIDTH / 2), (APPLICATION_HEIGHT - PADDLE_Y_OFFSET));
 		add(this.PADDLE);
-		}
 	}
 	
 	/** 
@@ -124,8 +124,7 @@ public class Breakout extends GraphicsProgram {
 	 * Listen for mouse movements
 	 */
 	public void mouseMoved(MouseEvent e) {
-		this.PADDLE.move(1, 1);
-//		this.PADDLE.setLocation((e.getX() - PADDLE_WIDTH / 2), PADDLE_Y_ORIGIN);
+		this.PADDLE.setLocation((e.getX() - PADDLE_WIDTH / 2), PADDLE_Y_ORIGIN);
 	}
 		
 	/** instantiate paddle object at coordinates x, y
