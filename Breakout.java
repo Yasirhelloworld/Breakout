@@ -186,7 +186,7 @@ public class Breakout extends GraphicsProgram {
 	private void initBall(int x, int y) {
 		int x0 = x - BALL_RADIUS;
 		int y0 = y - BALL_RADIUS;
-		this.BALL = new GOval(BALL_RADIUS, BALL_RADIUS);
+		this.BALL = new GOval(BALL_RADIUS * 2, BALL_RADIUS * 2);
 		BALL.setLocation(x0, y0);
 		BALL.setFilled(true);
 		BALL.setFillColor(Color.black);
