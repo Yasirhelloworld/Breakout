@@ -125,12 +125,12 @@ public class Breakout extends GraphicsProgram {
 	 * Paddle movement is restricted by bounds of application window
 	 */
 	public void mouseMoved(MouseEvent e) {
-		double leftEdge = PADDLE.getX() - PADDLE_WIDTH;
-		double rightEdge = PADDLE.getX() + PADDLE_WIDTH;
+//		double leftEdge = PADDLE.getX() - PADDLE_WIDTH;
+//		double rightEdge = PADDLE.getX() + PADDLE_WIDTH;
 		
 //		if (leftEdge < 0) {
 			// paddle hit left side of screen, do not move it
-			this.PADDLE.setLocation((e.getX() - PADDLE_WIDTH / 2), PADDLE_Y_ORIGIN);
+//			this.PADDLE.setLocation((e.getX() - PADDLE_WIDTH / 2), PADDLE_Y_ORIGIN);
 //		}
 	}
 		
