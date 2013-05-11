@@ -81,7 +81,7 @@ public class Breakout extends GraphicsProgram {
 /** Message box dimensions and font size */
 	private int MESSAGE_WIDTH = 200;
 	private int MESSAGE_HEIGHT = 100;
-	private int FONT_SIZE = 24;
+	private int FONT_SIZE = 72;
 	
 /** Instantiate random number generator */
 	private RandomGenerator rgen = RandomGenerator.getInstance();
