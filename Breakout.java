@@ -143,11 +143,16 @@ public class Breakout extends GraphicsProgram {
 		while (true) {
 			BALL.move(vx, vy);
 			pause(PAUSE_TIME);
+			// bounce if we hit a wall
 			if (ballHitVerticalWall()) {
 				vx = -vx;
 			}
 			if (ballHitHorizontalWall()) {
 				vy = -vy;
+			}
+			// bounce if we hit a brick
+			if (getElementAt(BALL.getX(), BALL.getY()).equals(null) != true) {
+				println("There's an element here!");
 			}
 		}
 	}
