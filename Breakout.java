@@ -59,7 +59,7 @@ public class Breakout extends GraphicsProgram {
 
 /** Number of turns */
 	private static final int NTURNS = 3;
-
+	
 /* Method: run() */
 /** Runs the Breakout program. */
 	public void init() {
@@ -109,14 +109,15 @@ public class Breakout extends GraphicsProgram {
 	 */
 	private void runGame() {
 		// game code goes here
-//		drawPaddle(100);
+		add(paddle(APPLICATION_WIDTH / 2));
 	}
 	
 	/**
 	 * Listen for mouse movements
 	 */
 	public void mouseMoved(MouseEvent e) {
-		add(paddle(e.getX()));
+		GRect paddle = paddle(e.getX());
+		paddle.move(e.getX(), 0);
 	}
 		
 	/** create paddle object centered at coordinate x (y is fixed)
