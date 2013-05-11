@@ -116,20 +116,20 @@ public class Breakout extends GraphicsProgram {
 	 * Listen for mouse movements
 	 */
 	public void mouseMoved(MouseEvent e) {
-		drawPaddle(e.getX());
+		add(paddle(e.getX()));
 	}
 		
-	/** Draw paddle centered at coordinate x (y is fixed)
+	/** create paddle object centered at coordinate x (y is fixed)
 	 * 
 	 * @param x coordinate of paddle 
 	 */
-	private void drawPaddle(int x) {
+	public GRect paddle(int x) {
 		int x0 = x - PADDLE_WIDTH / 2;
 		int y0 = APPLICATION_HEIGHT - PADDLE_Y_OFFSET - (PADDLE_HEIGHT / 2);
 		GRect paddle = new GRect(PADDLE_WIDTH, PADDLE_HEIGHT);
 		paddle.setLocation(x0, y0);
 		paddle.setFilled(true);
 		paddle.setFillColor(Color.black);
-		add(paddle);
+		return paddle;
 	}
 }
