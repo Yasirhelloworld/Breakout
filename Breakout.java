@@ -63,6 +63,9 @@ public class Breakout extends GraphicsProgram {
 /** Initialise paddle object */
 	private GRect PADDLE;
 	
+/** paddle y origin */
+	private int PADDLE_Y_ORIGIN = APPLICATION_HEIGHT - PADDLE_Y_OFFSET - PADDLE_HEIGHT / 2;
+	
 /* Method: run() */
 /** Runs the Breakout program. */
 	public void init() {
@@ -121,7 +124,7 @@ public class Breakout extends GraphicsProgram {
 	 * Listen for mouse movements
 	 */
 	public void mouseMoved(MouseEvent e) {
-		this.PADDLE.setLocation(e.getX(), (APPLICATION_HEIGHT - PADDLE_Y_OFFSET));
+		this.PADDLE.setLocation((e.getX() - PADDLE_WIDTH / 2), PADDLE_Y_ORIGIN);
 	}
 		
 	/** instantiate paddle object at coordinates x, y
@@ -131,9 +134,8 @@ public class Breakout extends GraphicsProgram {
 	 */
 	private void initPaddle(int x, int y) {
 		int x0 = x - PADDLE_WIDTH / 2;
-		int y0 = y - PADDLE_HEIGHT / 2;
 		this.PADDLE = new GRect(PADDLE_WIDTH, PADDLE_HEIGHT);
-		PADDLE.setLocation(x0, y0);
+		PADDLE.setLocation(x0, PADDLE_Y_ORIGIN);
 		PADDLE.setFilled(true);
 		PADDLE.setFillColor(Color.black);
 	}
