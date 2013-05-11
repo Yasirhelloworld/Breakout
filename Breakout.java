@@ -61,7 +61,7 @@ public class Breakout extends GraphicsProgram {
 	private static final int NTURNS = 3;
 	
 /** Initialise paddle object */
-	private GRect paddle;
+	private GRect PADDLE;
 	
 /* Method: run() */
 /** Runs the Breakout program. */
@@ -87,6 +87,9 @@ public class Breakout extends GraphicsProgram {
 				brickColor = Color.cyan;
 			}
 			drawRow(BRICK_X_OFFSET, (BRICK_Y_OFFSET + i * (BRICK_SEP + BRICK_HEIGHT)), brickColor);
+		// initialise and add paddle
+		initPaddle((APPLICATION_WIDTH / 2), (APPLICATION_HEIGHT - PADDLE_Y_OFFSET));
+		add(this.PADDLE);
 		}
 	}
 	
@@ -112,27 +115,26 @@ public class Breakout extends GraphicsProgram {
 	 */
 	private void runGame() {
 		// game code goes here
-		add(paddle(APPLICATION_WIDTH / 2));
 	}
 	
 	/**
 	 * Listen for mouse movements
 	 */
 	public void mouseMoved(MouseEvent e) {
-		this.paddle.setLocation(e.getX(), 0);
-		}
+		this.PADDLE.setLocation(e.getX(), (APPLICATION_HEIGHT - PADDLE_Y_OFFSET));
+	}
 		
-	/** create paddle object centered at coordinate x (y is fixed)
+	/** instantiate paddle object at coordinates x, y
 	 * 
 	 * @param x coordinate of paddle 
+	 * @param y coordinate of paddle
 	 */
-	private GRect paddle(int x) {
+	private void initPaddle(int x, int y) {
 		int x0 = x - PADDLE_WIDTH / 2;
-		int y0 = APPLICATION_HEIGHT - PADDLE_Y_OFFSET - (PADDLE_HEIGHT / 2);
-		this.paddle = new GRect(PADDLE_WIDTH, PADDLE_HEIGHT);
-		paddle.setLocation(x0, y0);
-		paddle.setFilled(true);
-		paddle.setFillColor(Color.black);
-		return paddle;
+		int y0 = y - PADDLE_HEIGHT / 2;
+		this.PADDLE = new GRect(PADDLE_WIDTH, PADDLE_HEIGHT);
+		PADDLE.setLocation(x0, y0);
+		PADDLE.setFilled(true);
+		PADDLE.setFillColor(Color.black);
 	}
 }
