@@ -129,9 +129,6 @@ public class Breakout extends GraphicsProgram {
 		if (rgen.nextBoolean(0.5)) vx = -vx;
 		int nBricks = NBRICKS_PER_ROW * NBRICK_ROWS;
 		
-		// DEBUG
-		showGameOver();
-		
 		/* Main animation loop */
 		while (true) {
 			BALL.move(vx, vy);
