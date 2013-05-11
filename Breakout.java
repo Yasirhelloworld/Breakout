@@ -119,7 +119,7 @@ public class Breakout extends GraphicsProgram {
 	 * Listen for mouse movements
 	 */
 	public void mouseMoved(MouseEvent e) {
-		this.paddle.move(e.getX(), 0);
+		this.paddle.setLocation(e.getX(), 0);
 		}
 		
 	/** create paddle object centered at coordinate x (y is fixed)
