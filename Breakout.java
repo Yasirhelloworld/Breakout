@@ -156,7 +156,7 @@ public class Breakout extends GraphicsProgram {
 	 * 
 	 */
 	private boolean ballHitVerticalWall() {
-		if (BALL.getY() <= BALL_RADIUS || BALL.getY() >= (APPLICATION_HEIGHT - BALL_RADIUS)) {
+		if (BALL.getX() <= BALL_RADIUS || BALL.getX() >= (APPLICATION_WIDTH - BALL_RADIUS)) {
 			return true;
 		} else {
 			return false;
@@ -167,7 +167,7 @@ public class Breakout extends GraphicsProgram {
 	 * 
 	 */
 	private boolean ballHitHorizontalWall() {
-		if (BALL.getX() <= BALL_RADIUS || BALL.getX() >= (APPLICATION_WIDTH - BALL_RADIUS)) {
+		if (BALL.getY() <= BALL_RADIUS || BALL.getY() >= (APPLICATION_HEIGHT - BALL_RADIUS)) {
 			return true;
 		} else {
 			return false;
