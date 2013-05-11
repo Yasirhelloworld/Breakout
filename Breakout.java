@@ -118,6 +118,7 @@ public class Breakout extends GraphicsProgram {
 	public void mouseMoved(MouseEvent e) {
 		GRect paddle = paddle(e.getX());
 		paddle.move(e.getX(), 0);
+		add(paddle);
 	}
 		
 	/** create paddle object centered at coordinate x (y is fixed)
