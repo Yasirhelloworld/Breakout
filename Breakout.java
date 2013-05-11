@@ -68,7 +68,7 @@ public class Breakout extends GraphicsProgram {
 	
 /* Method: run() */
 /** Runs the Breakout program. */
-	public void init() {
+	public void run() {
 		addMouseListeners();
 		setUpGame();
 		runGame();
@@ -92,6 +92,7 @@ public class Breakout extends GraphicsProgram {
 			drawRow(BRICK_X_OFFSET, (BRICK_Y_OFFSET + i * (BRICK_SEP + BRICK_HEIGHT)), brickColor);
 		// initialise and add paddle
 		initPaddle((APPLICATION_WIDTH / 2), (APPLICATION_HEIGHT - PADDLE_Y_OFFSET));
+		add(this.PADDLE);
 		}
 	}
 	
@@ -117,8 +118,6 @@ public class Breakout extends GraphicsProgram {
 	 */
 	private void runGame() {
 		// game code goes here
-		add(this.PADDLE);
-
 	}
 	
 	/**
