@@ -61,7 +61,7 @@ public class Breakout extends GraphicsProgram {
 	private static final int NTURNS = 3;
 	
 /** Pause time between updating animation frames */
-	private static final double PAUSE_TIME = 20; // in ms
+	private static final double PAUSE_TIME = 10; // in ms
 	
 /** Initialise paddle object */
 	private GRect PADDLE;
@@ -302,7 +302,7 @@ public class Breakout extends GraphicsProgram {
 		GLabel messageText = new GLabel(message);
 		messageText.setFont(MESSAGE_FONT);
 		double xLabel = (APPLICATION_WIDTH - messageText.getWidth()) / 2;
-		double yLabel = (APPLICATION_HEIGHT + messageText.getHeight()) / 2 - 5; //fudge factor to make it look neater
+		double yLabel = (APPLICATION_HEIGHT + messageText.getHeight()) / 2 - 5; // the 5 is a fudge factor to make it look more centered
 		messageText.setLocation(xLabel, yLabel);
 		add(messageText);
 	}
