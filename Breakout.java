@@ -74,6 +74,9 @@ public class Breakout extends GraphicsProgram {
 	private int BALL_X_INITIAL = APPLICATION_WIDTH / 2;
 	private int BALL_Y_INITIAL = APPLICATION_HEIGHT / 2;
 	
+/** Instantiate random number generator */
+	private RandomGenerator rgen = RandomGenerator.getInstance();
+	
 /* Method: run() */
 /** Runs the Breakout program. */
 	public void run() {
@@ -126,8 +129,12 @@ public class Breakout extends GraphicsProgram {
 	 * Runs the main game program
 	 */
 	private void runGame() {
-		// game code goes here
-		initBall(APPLICATION_WIDTH / 2, APPLICATION_HEIGHT / 2, 1, 1);
+		// initialise ball object
+		initBall(BALL_X_INITIAL, BALL_Y_INITIAL);
+		// kick the ball off with some initial velocity
+		vy = 2.0;
+		vx = rgen.nextDouble(1.0, 3.0);
+		if (rgen.nextBoolean(0.5)) vx = -vx;
 	}
 	
 	/** 
@@ -138,13 +145,8 @@ public class Breakout extends GraphicsProgram {
 	 * 
 	 * (coordinates describe center of ball)
 	 * 
-	 * with velocity
-	 * 
-	 * @param vx
-	 * @param vy
-	 * 
 	 */
-	private void initBall(int x, int y, double vx, double vy) {
+	private void initBall(int x, int y) {
 		int x0 = x - BALL_RADIUS;
 		int y0 = y - BALL_RADIUS;
 		this.BALL = new GOval(BALL_RADIUS, BALL_RADIUS);
