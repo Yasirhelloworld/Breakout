@@ -152,8 +152,8 @@ public class Breakout extends GraphicsProgram {
 			}
 			// bounce if we hit a brick
 			for (int i = 0; i < 4; i++) {
-				if (getElementAt(BALL.getX(), BALL.getY()) == null) {
-					println("There's NO element at: " + BALL.getX() + " , " + BALL.getY());
+				if (getElementAt(BALL.getX(), BALL.getY()) != null) {
+					println("There's an element at: " + BALL.getX() + " , " + BALL.getY());
 				}
 			}
 		}
