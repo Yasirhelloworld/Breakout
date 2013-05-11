@@ -140,7 +140,7 @@ public class Breakout extends GraphicsProgram {
 			if (ballHitTopWall()) {
 				vy = -vy;
 			} else if (ballHitBottomWall()){
-				showGameOver();
+				showMessage("GAME OVER");
 				break;
 			}
 			// bounce if we hit an object
@@ -153,7 +153,7 @@ public class Breakout extends GraphicsProgram {
 				nBricks -= 1;
 			}
 			if (nBricks == 0) {
-				println("YOU WIN");
+				showMessage("YOU WIN!");
 				break;
 			}
 		}
@@ -294,8 +294,7 @@ public class Breakout extends GraphicsProgram {
 	/**
 	 * prints a label centered to the screen indicating to the the user that the game is over
 	 */
-	private void showGameOver() {
-		String message = "GAME OVER";
+	private void showMessage(String message) {
 		GRect messageBox = new GRect((APPLICATION_WIDTH - MESSAGE_WIDTH) / 2, (APPLICATION_HEIGHT - MESSAGE_HEIGHT) / 2, MESSAGE_WIDTH, MESSAGE_HEIGHT);
 		messageBox.setFillColor(Color.LIGHT_GRAY);
 		messageBox.setFilled(true);
