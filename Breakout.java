@@ -118,6 +118,8 @@ public class Breakout extends GraphicsProgram {
 		double x0 = x - PADDLE_WIDTH / 2;
 		double y0 = APPLICATION_HEIGHT - PADDLE_Y_OFFSET - (PADDLE_HEIGHT / 2);
 		GRect paddle = new GRect(x0, y0, PADDLE_WIDTH, PADDLE_HEIGHT);
+		paddle.setFilled(true);
+		paddle.setFillColor(Color.black);
 		add(paddle);
 	}
 }
