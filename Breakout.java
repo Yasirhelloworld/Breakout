@@ -61,7 +61,7 @@ public class Breakout extends GraphicsProgram {
 	private static final int NTURNS = 3;
 	
 /** Pause time between updating animation frames */
-	private static final double PAUSE_TIME = 0.1; // in ms
+	private static final double PAUSE_TIME = 20; // in ms
 	
 /** Initialise paddle object */
 	private GRect PADDLE;
@@ -77,6 +77,11 @@ public class Breakout extends GraphicsProgram {
 /** Ball initial position */
 	private int BALL_X_INITIAL = APPLICATION_WIDTH / 2;
 	private int BALL_Y_INITIAL = APPLICATION_HEIGHT / 2;
+	
+/** Message box dimensions and font size */
+	private int MESSAGE_WIDTH = 200;
+	private int MESSAGE_HEIGHT = 100;
+	private int FONT_SIZE = 24;
 	
 /** Instantiate random number generator */
 	private RandomGenerator rgen = RandomGenerator.getInstance();
@@ -123,6 +128,10 @@ public class Breakout extends GraphicsProgram {
 		vx = rgen.nextDouble(1.0, 3.0);
 		if (rgen.nextBoolean(0.5)) vx = -vx;
 		int nBricks = NBRICKS_PER_ROW * NBRICK_ROWS;
+		
+		// DEBUG
+		showGameOver();
+		
 		/* Main animation loop */
 		while (true) {
 			BALL.move(vx, vy);
@@ -134,9 +143,8 @@ public class Breakout extends GraphicsProgram {
 			if (ballHitTopWall()) {
 				vy = -vy;
 			} else if (ballHitBottomWall()){
-				vy = -vy;
-//				println("YOU LOSE");
-//				break;
+				showGameOver();
+				break;
 			}
 			// bounce if we hit an object
 			GObject collider = getCollidingObject();
@@ -284,5 +292,20 @@ public class Breakout extends GraphicsProgram {
 	//		brick.setColor(color); // uncomment to remove borders
 		add(brick);
 		}
+	}
+	
+	/**
+	 * prints a label centered to the screen indicating to the the user that the game is over
+	 */
+	private void showGameOver() {
+		String message = "GAME OVER";
+		GRect messageBox = new GRect((APPLICATION_WIDTH - MESSAGE_WIDTH) / 2, (APPLICATION_HEIGHT - MESSAGE_HEIGHT) / 2, MESSAGE_WIDTH, MESSAGE_HEIGHT);
+		messageBox.setFillColor(Color.LIGHT_GRAY);
+		add(messageBox);
+		GLabel messageText = new GLabel(message);
+		double xLabel = (APPLICATION_WIDTH - messageText.getWidth()) / 2;
+		double yLabel = (APPLICATION_HEIGHT + messageText.getHeight()) / 2;
+		messageText.setLocation(xLabel, yLabel);
+		add(messageText);
 	}
 }
