@@ -90,6 +90,9 @@ public class Breakout extends GraphicsProgram {
 				brickColor = Color.cyan;
 			}
 			drawRow(BRICK_X_OFFSET, (BRICK_Y_OFFSET + i * (BRICK_SEP + BRICK_HEIGHT)), brickColor);
+		// initialise and add paddle
+		initPaddle((APPLICATION_WIDTH / 2), (APPLICATION_HEIGHT - PADDLE_Y_OFFSET));
+		add(this.PADDLE);
 		}
 	}
 	
