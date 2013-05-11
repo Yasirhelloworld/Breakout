@@ -61,7 +61,7 @@ public class Breakout extends GraphicsProgram {
 	private static final int NTURNS = 3;
 	
 /** Pause time between updating animation frames */
-	private static final int PAUSE_TIME = 20; // in ms
+	private static final int PAUSE_TIME = 2; // in ms
 	
 /** Initialise paddle object */
 	private GRect PADDLE;
@@ -72,7 +72,7 @@ public class Breakout extends GraphicsProgram {
 /** Initialise ball object */
 	private GOval BALL;
 	private double vx, vy; //velocity components of ball
-	private double BALL_VY_INITIAL = 500.0; //initial y velocity of ball
+	private double BALL_VY_INITIAL = 3.0; //initial y velocity of ball
 	
 /** Ball initial position */
 	private int BALL_X_INITIAL = APPLICATION_WIDTH / 2;
