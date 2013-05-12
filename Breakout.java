@@ -368,16 +368,16 @@ public class Breakout extends GraphicsProgram {
 	 * prints a label centered to the screen indicating to the the user that the game is over (or won)
 	 */
 	private void showMessage(String message) {
-		this.messageBox.setBounds((APPLICATION_WIDTH - MESSAGE_WIDTH) / 2, (APPLICATION_HEIGHT - MESSAGE_HEIGHT) / 2, MESSAGE_WIDTH, MESSAGE_HEIGHT);
+		this.messageBox = new GRect((APPLICATION_WIDTH - MESSAGE_WIDTH) / 2, (APPLICATION_HEIGHT - MESSAGE_HEIGHT) / 2, MESSAGE_WIDTH, MESSAGE_HEIGHT);
 		messageBox.setFillColor(Color.LIGHT_GRAY);
 		messageBox.setFilled(true);
-		add(messageBox);
-		this.messageText.setLabel(message);
+		add(this.messageBox);
+		this.messageText = new GLabel(message);
 		messageText.setFont(MESSAGE_FONT);
 		double xLabel = (APPLICATION_WIDTH - messageText.getWidth()) / 2;
 		double yLabel = (APPLICATION_HEIGHT + messageText.getHeight()) / 2 + MESSAGE_FUDGE_FACTOR; // the fudge factor is to make it look more centered
 		messageText.setLocation(xLabel, yLabel);
-		add(messageText);
+		add(this.messageText);
 	}
 	
 	/**
