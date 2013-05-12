@@ -67,22 +67,29 @@ public class Breakout extends GraphicsProgram {
 	private GRect PADDLE;
 	
 /** paddle y origin */
-	private int PADDLE_Y_ORIGIN = APPLICATION_HEIGHT - PADDLE_Y_OFFSET - PADDLE_HEIGHT / 2;
+	private static final int PADDLE_Y_ORIGIN = APPLICATION_HEIGHT - PADDLE_Y_OFFSET - PADDLE_HEIGHT / 2;
 	
 /** Initialise ball object */
 	private GOval BALL;
 	private double vx, vy; //velocity components of ball
-	private double BALL_VY_INITIAL = 3.0; //initial y velocity of ball
+	private static final double BALL_VY_INITIAL = 3.0; //initial y velocity of ball
 	
 /** Ball initial position */
-	private int BALL_X_INITIAL = APPLICATION_WIDTH / 2;
-	private int BALL_Y_INITIAL = APPLICATION_HEIGHT / 2;
+	private static final int BALL_X_INITIAL = APPLICATION_WIDTH / 2;
+	private static final int BALL_Y_INITIAL = APPLICATION_HEIGHT / 2;
+	
+/** Ball initial number of lives */
+	private static final int NLIVES_INITIAL = 3;
+	
+/** Initialise remaining lives tracker and label */
+	private GLabel livesRemainingLabel;
+	private int livesRemaining;
 	
 /** Message box dimensions and font style */
-	private int MESSAGE_WIDTH = 200;
-	private int MESSAGE_HEIGHT = 100;
-	private Font MESSAGE_FONT = new Font("Sans", Font.PLAIN, 32);
-	private int MESSAGE_FUDGE_FACTOR = -5; // a value in pixels that adjusts the y position of the displayed message (to make it look more aesthetically pleasing)
+	private static final int MESSAGE_WIDTH = 200;
+	private static final int MESSAGE_HEIGHT = 100;
+	private static final Font MESSAGE_FONT = new Font("Sans", Font.PLAIN, 32);
+	private static final int MESSAGE_FUDGE_FACTOR = -5; // a value in pixels that adjusts the y position of the displayed message (to make it look more aesthetically pleasing)
 	
 /** Instantiate random number generator */
 	private RandomGenerator rgen = RandomGenerator.getInstance();
@@ -119,6 +126,9 @@ public class Breakout extends GraphicsProgram {
 		addMouseListeners();
 		// initialise and add paddle
 		initPaddle(APPLICATION_WIDTH / 2);
+		// initialise and add lives remaining display
+		livesRemaining = NLIVES_INITIAL;
+		updateLivesRemaining();
 	}
 	
 	/** 
@@ -132,6 +142,7 @@ public class Breakout extends GraphicsProgram {
 		vx = rgen.nextDouble(1.0, 3.0);
 		if (rgen.nextBoolean(0.5)) vx = -vx;
 		int nBricks = NBRICKS_PER_ROW * NBRICK_ROWS;
+		int nLives = NLIVES_INITIAL;		
 		
 		/* Main animation loop */
 		while (true) {
@@ -143,7 +154,9 @@ public class Breakout extends GraphicsProgram {
 			}
 			if (ballHitTopWall()) {
 				vy = -vy;
-			} else if (ballHitBottomWall()){
+			} else if (ballHitBottomWall()) {
+				livesRemaining -= 1;
+				updateLivesRemaining();
 				showMessage("GAME OVER");
 				break;
 			}
@@ -330,7 +343,7 @@ public class Breakout extends GraphicsProgram {
 	}
 	
 	/**
-	 * prints a label centered to the screen indicating to the the user that the game is over
+	 * prints a label centered to the screen indicating to the the user that the game is over (or won)
 	 */
 	private void showMessage(String message) {
 		GRect messageBox = new GRect((APPLICATION_WIDTH - MESSAGE_WIDTH) / 2, (APPLICATION_HEIGHT - MESSAGE_HEIGHT) / 2, MESSAGE_WIDTH, MESSAGE_HEIGHT);
@@ -343,5 +356,18 @@ public class Breakout extends GraphicsProgram {
 		double yLabel = (APPLICATION_HEIGHT + messageText.getHeight()) / 2 + MESSAGE_FUDGE_FACTOR; // the fudge factor is to make it look more centered
 		messageText.setLocation(xLabel, yLabel);
 		add(messageText);
+	}
+	
+	/**
+	 * draws/updates livesRemaining label
+	 */
+	private void updateLivesRemaining() {
+		String labelText = "Lives remaining = " + livesRemaining;
+		livesRemainingLabel = new GLabel(labelText);
+		double width = livesRemainingLabel.getWidth();
+		double height = livesRemainingLabel.getHeight();
+		livesRemainingLabel.setLocation(APPLICATION_WIDTH - width, height);
+		add(livesRemainingLabel);
+		
 	}
 }
