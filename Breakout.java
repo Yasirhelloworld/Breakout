@@ -139,6 +139,7 @@ public class Breakout extends GraphicsProgram {
 	 */
 	public void mousePressed(MouseEvent e) {
 		remove(messageBox);
+		remove(messageText);
 		if (livesRemaining == 0) {
 			showMessage("GAME OVER");
 			livesRemaining = 3;
