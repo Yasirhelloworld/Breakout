@@ -64,6 +64,8 @@ public class Breakout extends GraphicsProgram {
 	private static final double PAUSE_TIME = 10; // in ms
 	
 /** Message box dimensions and font style */
+	private GRect messageBox;
+	private GRect messageLabel; // make these classwide objects as we only ever want one of each
 	private static final int MESSAGE_WIDTH = 200;
 	private static final int MESSAGE_HEIGHT = 100;
 	private static final Font MESSAGE_FONT = new Font("Sans", Font.PLAIN, 18);
@@ -136,6 +138,7 @@ public class Breakout extends GraphicsProgram {
 	 * Main game loop goes inside here, wait for user input before entering each new loop (i.e. new game after lost life)
 	 */
 	public void mousePressed(MouseEvent e) {
+		remove(messageBox);
 		if (livesRemaining == 0) {
 			showMessage("GAME OVER");
 			livesRemaining = 3;
