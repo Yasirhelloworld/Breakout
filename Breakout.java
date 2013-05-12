@@ -141,6 +141,7 @@ public class Breakout extends GraphicsProgram {
 		// quick and dirty hack to remove old labels
 		while (getElementAt(APPLICATION_WIDTH / 2, APPLICATION_HEIGHT / 2) != null) {
 			remove(getElementAt(APPLICATION_WIDTH / 2, APPLICATION_HEIGHT / 2));
+			println(getElementAt(APPLICATION_WIDTH / 2, APPLICATION_HEIGHT / 2));
 		}
 		if (livesRemaining == 0) {
 			showMessage("GAME OVER");
