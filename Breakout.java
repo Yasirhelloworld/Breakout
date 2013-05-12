@@ -139,8 +139,8 @@ public class Breakout extends GraphicsProgram {
 	 */
 	public void mousePressed(MouseEvent e) {
 		// quick and dirty hack to remove old labels
-		remove(messageBox);
-		remove(messageText);
+		remove(this.messageBox);
+		remove(this.messageText);
 		pause(1000);
 		if (livesRemaining == 0) {
 			showMessage("GAME OVER");
