@@ -82,7 +82,7 @@ public class Breakout extends GraphicsProgram {
 	private static final int NLIVES_INITIAL = 3;
 	
 /** Initialise remaining lives tracker and label */
-	private GLabel livesRemainingLabel;
+	private GLabel livesRemainingLabel = new GLabel("");
 	private int livesRemaining;
 	
 /** Message box dimensions and font style */
@@ -363,11 +363,12 @@ public class Breakout extends GraphicsProgram {
 	 */
 	private void updateLivesRemaining() {
 		String labelText = "Lives remaining = " + livesRemaining;
-		livesRemainingLabel = new GLabel(labelText);
+		livesRemainingLabel.setLabel(labelText);
 		double width = livesRemainingLabel.getWidth();
 		double height = livesRemainingLabel.getHeight();
 		livesRemainingLabel.setLocation(APPLICATION_WIDTH - width, height);
-		add(livesRemainingLabel);
-		
+		if (livesRemainingLabel.isVisible() == false) {
+			add(livesRemainingLabel);
+		}
 	}
 }
