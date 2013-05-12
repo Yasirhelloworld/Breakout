@@ -179,7 +179,6 @@ public class Breakout extends GraphicsProgram {
 				livesRemaining -= 1;
 				updateLivesRemaining();
 				remove(BALL);
-				println("We hit: " + getCollidingObjectBottom());
 				showMessage("Lives remaining: " + livesRemaining + ". Click to continue");
 				break;
 			}
