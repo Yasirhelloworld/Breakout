@@ -61,7 +61,7 @@ public class Breakout extends GraphicsProgram {
 	private static final int NTURNS = 3;
 	
 /** Pause time between updating animation frames */
-	private static final double PAUSE_TIME = 10; // in ms
+	private static final double PAUSE_TIME = 100; // in ms
 	
 /** Initialise paddle object */
 	private GRect PADDLE;
@@ -151,9 +151,9 @@ public class Breakout extends GraphicsProgram {
 			GObject collider = getCollidingObjectBottom();
 			if (collider == PADDLE) {
 				vy = -Math.abs(vy);
-				if (BALL.getX() - PADDLE.getX() > PADDLE_WIDTH / 2) {
+				if (BALL.getX() - PADDLE.getX() > PADDLE_WIDTH / 4) {
 					vx = -6.0;
-				} else if (BALL.getX() - PADDLE.getX() < -PADDLE_WIDTH / 2) {
+				} else if (BALL.getX() - PADDLE.getX() < -PADDLE_WIDTH / 4) {
 					vx = 6.0;
 				}
 				bounceClip.play();
