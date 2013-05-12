@@ -140,8 +140,6 @@ public class Breakout extends GraphicsProgram {
 		
 		/* Main animation loop */
 		while (true) {
-			// cleanup old ball object
-			remove(BALL);
 			if (livesRemaining == 0) {
 				showMessage("GAME OVER");
 				break;
@@ -162,8 +160,10 @@ public class Breakout extends GraphicsProgram {
 				if (ballHitTopWall()) {
 					vy = -vy;
 				} else if (ballHitBottomWall()) {
+					// FAILZ
 					livesRemaining -= 1;
 					updateLivesRemaining();
+					remove(BALL);
 					break;
 				}
 				// bounce upwards if we hit an object below
