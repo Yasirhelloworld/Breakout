@@ -138,8 +138,10 @@ public class Breakout extends GraphicsProgram {
 	 * Main game loop goes inside here, wait for user input before entering each new loop (i.e. new game after lost life)
 	 */
 	public void mousePressed(MouseEvent e) {
-		remove(messageBox);
-		remove(messageText);
+		// quick and dirty hack to remove old labels
+		while (getElementAt(APPLICATION_WIDTH / 2, APPLICATION_HEIGHT / 2) != null) {
+			remove(getElementAt(APPLICATION_WIDTH / 2, APPLICATION_HEIGHT / 2));
+		}
 		if (livesRemaining == 0) {
 			showMessage("GAME OVER");
 			livesRemaining = 3;
