@@ -166,6 +166,7 @@ public class Breakout extends GraphicsProgram {
 		
 		/* Main game loop */
 		while (true) {
+			pause(500);
 			BALL.move(vx, vy);
 			pause(PAUSE_TIME);
 			// bounce if we hit a wall
