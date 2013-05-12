@@ -87,6 +87,9 @@ public class Breakout extends GraphicsProgram {
 /** Instantiate random number generator */
 	private RandomGenerator rgen = RandomGenerator.getInstance();
 	
+/** Load audioclip object */
+	private AudioClip bounceClip = MediaTools.loadAudioClip("bounce.au");
+
 /* Method: run() */
 /** Runs the Breakout program. */
 	public void run() {
@@ -148,19 +151,23 @@ public class Breakout extends GraphicsProgram {
 			GObject collider = getCollidingObjectBottom();
 			if (collider == PADDLE) {
 				vy = -Math.abs(vy);
+				bounceClip.play();
 			} else if (collider != null) { // we hit a brick
 				vy = -Math.abs(vy);
 				remove(collider);
 				nBricks -= 1;
+				bounceClip.play();
 			}
 			// bounce downwards if we hit an object above
 			collider = getCollidingObjectTop();
 			if (collider == PADDLE) {
 				vy = Math.abs(vy);
+				bounceClip.play();
 			} else if (collider != null) { // we hit a brick
 				vy = Math.abs(vy);
 				remove(collider);
 				nBricks -= 1;
+				bounceClip.play();
 			}
 			if (nBricks == 0) {
 				showMessage("YOU WIN!");
@@ -176,10 +183,10 @@ public class Breakout extends GraphicsProgram {
 	 * @return GObject that we collided with. If none, return null
 	 */
 	private GObject getCollidingObjectBottom() {
-		// grab elements at all four corners
+		// grab elements
 		GObject bottomLeftElement = getElementAt(BALL.getX(), (BALL.getY() + BALL_RADIUS * 2));
 		GObject bottomRightElement = getElementAt((BALL.getX() + BALL_RADIUS * 2), (BALL.getY() + BALL_RADIUS * 2));
-		// iterate clockwise, if we encounter an element return it
+		// return element we collided with
 		if (bottomRightElement != null) {
 			return bottomRightElement;
 		} else if (bottomLeftElement != null) {
@@ -196,10 +203,10 @@ public class Breakout extends GraphicsProgram {
 	 * @return
 	 */
 	private GObject getCollidingObjectTop() {
-		// grab elements at all four corners
+		// grab elements
 		GObject topLeftElement = getElementAt(BALL.getX(), BALL.getY());
 		GObject topRightElement = getElementAt((BALL.getX() + BALL_RADIUS * 2), BALL.getY());
-		// iterate clockwise, if we encounter an element return it
+		// return element we collided with
 		if (topLeftElement != null) {
 			return topLeftElement;
 		} else if (topRightElement != null) {
