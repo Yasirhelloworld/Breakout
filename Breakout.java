@@ -377,6 +377,8 @@ public class Breakout extends GraphicsProgram {
 		double yLabel = (APPLICATION_HEIGHT + messageText.getHeight()) / 2 + MESSAGE_FUDGE_FACTOR; // the fudge factor is to make it look more centered
 		messageText.setLocation(xLabel, yLabel);
 		add(messageText);
+		remove(messageBox);
+		remove(messageText);
 	}
 	
 	/**
