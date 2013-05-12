@@ -65,7 +65,7 @@ public class Breakout extends GraphicsProgram {
 	
 /** Message box dimensions and font style */
 	private GRect messageBox;
-	private GRect messageText; // make these classwide objects as we only ever want one of each
+	private GLabel messageText; // make these classwide objects as we only ever want one of each
 	private static final int MESSAGE_WIDTH = 200;
 	private static final int MESSAGE_HEIGHT = 100;
 	private static final Font MESSAGE_FONT = new Font("Sans", Font.PLAIN, 18);
