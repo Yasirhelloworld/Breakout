@@ -140,6 +140,8 @@ public class Breakout extends GraphicsProgram {
 		
 		/* Main animation loop */
 		while (true) {
+			// cleanup old ball object
+			remove(BALL);
 			if (livesRemaining == 0) {
 				showMessage("GAME OVER");
 				break;
