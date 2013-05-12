@@ -146,55 +146,63 @@ public class Breakout extends GraphicsProgram {
 		
 		/* Main animation loop */
 		while (true) {
-			BALL.move(vx, vy);
-			pause(PAUSE_TIME);
-			// bounce if we hit a wall
-			if (ballHitVerticalWall()) {
-				vx = -vx;
-			}
-			if (ballHitTopWall()) {
-				vy = -vy;
-			} else if (ballHitBottomWall()) {
-				livesRemaining -= 1;
-				updateLivesRemaining();
+			if (livesRemaining == 0) {
 				showMessage("GAME OVER");
 				break;
 			}
-			// bounce upwards if we hit an object below
-			GObject collider = getCollidingObjectBottom();
-			if (collider == PADDLE) {
-				vy = -Math.abs(vy);
-				/* if ball hits edge of paddle from which ball is coming, also bounce x */
-				if (((BALL.getX() + BALL_RADIUS) - (PADDLE.getX() + PADDLE_WIDTH / 2)) > PADDLE_WIDTH / 4) { //right hand side of paddle
-					vx = Math.abs(vx);
-				} else if (((BALL.getX() + BALL_RADIUS) - (PADDLE.getX() + PADDLE_WIDTH / 2)) < -PADDLE_WIDTH / 4) { //left hand side of paddle
-					vx = -Math.abs(vx);
+			while (true) {
+				BALL.move(vx, vy);
+				pause(PAUSE_TIME);
+				// bounce if we hit a wall
+				if (ballHitVerticalWall()) {
+					vx = -vx;
 				}
-				bounceClip.play();
-			} else if (collider != null) { // we hit a brick
-				vy = -Math.abs(vy);
-				remove(collider);
-				nBricks -= 1;
-				bounceClip.play();
-			}
-			// bounce downwards if we hit an object above
-			collider = getCollidingObjectTop();
-			if (collider == PADDLE) {
-				vy = Math.abs(vy);
-				bounceClip.play();
-			} else if (collider != null) { // we hit a brick
-				vy = Math.abs(vy);
-				remove(collider);
-				nBricks -= 1;
-				bounceClip.play();
-			}
-			if (nBricks == 0) {
-				showMessage("YOU WIN!");
-				break;
+				if (ballHitTopWall()) {
+					vy = -vy;
+				} else if (ballHitBottomWall()) {
+					livesRemaining -= 1;
+					updateLivesRemaining();
+					break;
+				}
+				// bounce upwards if we hit an object below
+				GObject collider = getCollidingObjectBottom();
+				if (collider == PADDLE) {
+					vy = -Math.abs(vy);
+					/* if ball hits edge of paddle on side from which ball is coming, also bounce x */
+					if (((BALL.getX() + BALL_RADIUS) - (PADDLE.getX() + PADDLE_WIDTH / 2)) > PADDLE_WIDTH / 4) { //right hand side of paddle
+						vx = Math.abs(vx);
+					} else if (((BALL.getX() + BALL_RADIUS) - (PADDLE.getX() + PADDLE_WIDTH / 2)) < -PADDLE_WIDTH / 4) { //left hand side of paddle
+						vx = -Math.abs(vx);
+					}
+					bounceClip.play();
+				} else if (collider != null) { // we hit a brick
+					vy = -Math.abs(vy);
+					remove(collider);
+					nBricks -= 1;
+					bounceClip.play();
+				}
+				// bounce downwards if we hit an object above
+				collider = getCollidingObjectTop();
+				if (collider == PADDLE) {
+					vy = Math.abs(vy);
+					bounceClip.play();
+				} else if (collider != null) { // we hit a brick
+					vy = Math.abs(vy);
+					remove(collider);
+					nBricks -= 1;
+					bounceClip.play();
+				}
+				if (nBricks == 0) {
+					showMessage("YOU WIN!");
+					break;
+				}
 			}
 		}
 	}
 	
+	private void animationLoop() {
+		
+	}
 	/**
 	 * Iterate over the bottom two corners of the ball hit box and see if 
 	 * we hit an object
@@ -362,7 +370,7 @@ public class Breakout extends GraphicsProgram {
 	 * draws/updates livesRemaining label
 	 */
 	private void updateLivesRemaining() {
-		String labelText = "Lives remaining = " + livesRemaining;
+		String labelText = "Lives remaining: " + livesRemaining;
 		livesRemainingLabel.setLabel(labelText);
 		double width = livesRemainingLabel.getWidth();
 		double height = livesRemainingLabel.getHeight();
