@@ -151,11 +151,11 @@ public class Breakout extends GraphicsProgram {
 			GObject collider = getCollidingObjectBottom();
 			if (collider == PADDLE) {
 				vy = -Math.abs(vy);
-				if (BALL.getX() - PADDLE.getX() > PADDLE_WIDTH / 4) {
-					vx = -6.0;
-				} else if (BALL.getX() - PADDLE.getX() < -PADDLE_WIDTH / 4) {
-					vx = 6.0;
-				}
+				/* if ball hits edge of paddle from which ball is coming, also bounce x */
+				if (BALL.getX() - PADDLE.getX() > PADDLE_WIDTH / 4) { //right hand side of paddle
+					vx = Math.abs(vx);
+				} else if (BALL.getX() - PADDLE.getX() < -PADDLE_WIDTH / 4) { //left hand side of paddle
+					vx = -Math.abs(vx);
 				bounceClip.play();
 			} else if (collider != null) { // we hit a brick
 				vy = -Math.abs(vy);
