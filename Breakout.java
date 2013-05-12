@@ -209,7 +209,6 @@ public class Breakout extends GraphicsProgram {
 				remove(collider);
 				nBricks -= 1;
 				bounceClip.play();
-				println("We hit a brick");
 			}
 			if (nBricks == 0) {
 				showMessage("YOU WIN!");
