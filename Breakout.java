@@ -367,8 +367,6 @@ public class Breakout extends GraphicsProgram {
 		double width = livesRemainingLabel.getWidth();
 		double height = livesRemainingLabel.getHeight();
 		livesRemainingLabel.setLocation(APPLICATION_WIDTH - width, height);
-		if (livesRemainingLabel.isVisible() == false) {
-			add(livesRemainingLabel);
-		}
+		add(livesRemainingLabel);
 	}
 }
