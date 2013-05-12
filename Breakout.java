@@ -66,7 +66,7 @@ public class Breakout extends GraphicsProgram {
 /** Message box dimensions and font style */
 	private static final int MESSAGE_WIDTH = 200;
 	private static final int MESSAGE_HEIGHT = 100;
-	private static final Font MESSAGE_FONT = new Font("Sans", Font.PLAIN, 32);
+	private static final Font MESSAGE_FONT = new Font("Sans", Font.PLAIN, 18);
 	private static final int MESSAGE_FUDGE_FACTOR = -5; // a value in pixels that adjusts the y position of the displayed message (to make it look more aesthetically pleasing)
 	
 /** paddle y origin */
