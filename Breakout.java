@@ -152,9 +152,9 @@ public class Breakout extends GraphicsProgram {
 			if (collider == PADDLE) {
 				vy = -Math.abs(vy);
 				if (BALL.getX() - PADDLE.getX() > PADDLE_WIDTH / 2) {
-					vx = 6.0;
-				} else if (BALL.getX() - PADDLE.getX() < -PADDLE_WIDTH / 2) {
 					vx = -6.0;
+				} else if (BALL.getX() - PADDLE.getX() < -PADDLE_WIDTH / 2) {
+					vx = 6.0;
 				}
 				bounceClip.play();
 			} else if (collider != null) { // we hit a brick
