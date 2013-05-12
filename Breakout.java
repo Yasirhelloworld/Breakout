@@ -151,6 +151,7 @@ public class Breakout extends GraphicsProgram {
 			GObject collider = getCollidingObjectBottom();
 			if (collider == PADDLE) {
 				vy = -Math.abs(vy);
+				vx += BALL.getX() - PADDLE.getX();
 				bounceClip.play();
 			} else if (collider != null) { // we hit a brick
 				vy = -Math.abs(vy);
