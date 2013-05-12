@@ -63,8 +63,11 @@ public class Breakout extends GraphicsProgram {
 /** Pause time between updating animation frames */
 	private static final double PAUSE_TIME = 10; // in ms
 	
-/** Initialise paddle object */
-	private GRect PADDLE;
+/** Message box dimensions and font style */
+	private static final int MESSAGE_WIDTH = 200;
+	private static final int MESSAGE_HEIGHT = 100;
+	private static final Font MESSAGE_FONT = new Font("Sans", Font.PLAIN, 32);
+	private static final int MESSAGE_FUDGE_FACTOR = -5; // a value in pixels that adjusts the y position of the displayed message (to make it look more aesthetically pleasing)
 	
 /** paddle y origin */
 	private static final int PADDLE_Y_ORIGIN = APPLICATION_HEIGHT - PADDLE_Y_OFFSET - PADDLE_HEIGHT / 2;
@@ -78,18 +81,15 @@ public class Breakout extends GraphicsProgram {
 	private static final int BALL_X_INITIAL = APPLICATION_WIDTH / 2;
 	private static final int BALL_Y_INITIAL = APPLICATION_HEIGHT / 2;
 	
-/** Ball initial number of lives */
-	private static final int NLIVES_INITIAL = 3;
-	
 /** Initialise remaining lives tracker and label */
 	private GLabel livesRemainingLabel = new GLabel("");
 	private int livesRemaining;
 	
-/** Message box dimensions and font style */
-	private static final int MESSAGE_WIDTH = 200;
-	private static final int MESSAGE_HEIGHT = 100;
-	private static final Font MESSAGE_FONT = new Font("Sans", Font.PLAIN, 32);
-	private static final int MESSAGE_FUDGE_FACTOR = -5; // a value in pixels that adjusts the y position of the displayed message (to make it look more aesthetically pleasing)
+/** Initialise paddle object */
+	private GRect PADDLE;
+	
+/** Ball initial number of lives */
+	private static final int NLIVES_INITIAL = 3;
 	
 /** Instantiate random number generator */
 	private RandomGenerator rgen = RandomGenerator.getInstance();
@@ -98,13 +98,13 @@ public class Breakout extends GraphicsProgram {
 	private AudioClip bounceClip = MediaTools.loadAudioClip("bounce.au");
 
 /* Method: run() */
-/** Runs the Breakout program. */
+/** Sets up the Breakout program. */
 	public void run() {
 		setUpGame();
-		runGame();
+//		runGame(); // instead of running immediately, wait for user input (i.e. in mousePressed) before starting
 	}
 	
-	/** sets up the game board with colored bricks */
+/** Initialises bricks, paddle and sets up lives remaining */
 	private void setUpGame() {
 		// draw bricks
 		for (int i = 0; i < NBRICK_ROWS; i++) {
@@ -129,13 +129,18 @@ public class Breakout extends GraphicsProgram {
 		// initialise and add lives remaining display
 		livesRemaining = NLIVES_INITIAL;
 		updateLivesRemaining();
+		showMessage("Click to start...");
 	}
 	
 	/**
-	 * 
+	 * Main game loop goes inside here, wait for user input before entering each new loop (i.e. new game after lost life)
 	 */
 	public void mousePressed(MouseEvent e) {
-		println("mouse was pressed");
+		if (livesRemaining == 0) {
+			showMessage("GAME OVER");
+			livesRemaining = 3;
+		}		
+		runGame();
 	}
 	
 	/** 
@@ -145,68 +150,62 @@ public class Breakout extends GraphicsProgram {
 		int nBricks = NBRICKS_PER_ROW * NBRICK_ROWS;
 		int nLives = NLIVES_INITIAL;		
 		
+		// initialise ball object
+		initBall(BALL_X_INITIAL, BALL_Y_INITIAL);
+		// kick the ball off with some initial velocity
+		vy = BALL_VY_INITIAL;
+		vx = rgen.nextDouble(1.0, 3.0);
+		if (rgen.nextBoolean(0.5)) vx = -vx;
+		
 		/* Main game loop */
 		while (true) {
-			if (livesRemaining == 0) {
-				showMessage("GAME OVER");
+			BALL.move(vx, vy);
+			pause(PAUSE_TIME);
+			// bounce if we hit a wall
+			if (ballHitVerticalWall()) {
+				vx = -vx;
+			}
+			if (ballHitTopWall()) {
+				vy = -vy;
+			} else if (ballHitBottomWall()) {
+				// FAILZ
+				livesRemaining -= 1;
+				updateLivesRemaining();
+				remove(BALL);
+				showMessage("Lives remaining: " + livesRemaining + ". Click to continue");
 				break;
 			}
-			// (hopefully) freeze until we get a mouseclick event
-			
-			// initialise ball object
-			initBall(BALL_X_INITIAL, BALL_Y_INITIAL);
-			// kick the ball off with some initial velocity
-			vy = BALL_VY_INITIAL;
-			vx = rgen.nextDouble(1.0, 3.0);
-			if (rgen.nextBoolean(0.5)) vx = -vx;
-			while (true) {
-				BALL.move(vx, vy);
-				pause(PAUSE_TIME);
-				// bounce if we hit a wall
-				if (ballHitVerticalWall()) {
-					vx = -vx;
+			// bounce upwards if we hit an object below
+			GObject collider = getCollidingObjectBottom();
+			if (collider == PADDLE) {
+				vy = -Math.abs(vy);
+				/* if ball hits edge of paddle on side from which ball is coming, also bounce x */
+				if (((BALL.getX() + BALL_RADIUS) - (PADDLE.getX() + PADDLE_WIDTH / 2)) > PADDLE_WIDTH / 4) { //right hand side of paddle
+					vx = Math.abs(vx);
+				} else if (((BALL.getX() + BALL_RADIUS) - (PADDLE.getX() + PADDLE_WIDTH / 2)) < -PADDLE_WIDTH / 4) { //left hand side of paddle
+					vx = -Math.abs(vx);
 				}
-				if (ballHitTopWall()) {
-					vy = -vy;
-				} else if (ballHitBottomWall()) {
-					// FAILZ
-					livesRemaining -= 1;
-					updateLivesRemaining();
-					remove(BALL);
-					break;
-				}
-				// bounce upwards if we hit an object below
-				GObject collider = getCollidingObjectBottom();
-				if (collider == PADDLE) {
-					vy = -Math.abs(vy);
-					/* if ball hits edge of paddle on side from which ball is coming, also bounce x */
-					if (((BALL.getX() + BALL_RADIUS) - (PADDLE.getX() + PADDLE_WIDTH / 2)) > PADDLE_WIDTH / 4) { //right hand side of paddle
-						vx = Math.abs(vx);
-					} else if (((BALL.getX() + BALL_RADIUS) - (PADDLE.getX() + PADDLE_WIDTH / 2)) < -PADDLE_WIDTH / 4) { //left hand side of paddle
-						vx = -Math.abs(vx);
-					}
-					bounceClip.play();
-				} else if (collider != null) { // we hit a brick
-					vy = -Math.abs(vy);
-					remove(collider);
-					nBricks -= 1;
-					bounceClip.play();
-				}
-				// bounce downwards if we hit an object above
-				collider = getCollidingObjectTop();
-				if (collider == PADDLE) {
-					vy = Math.abs(vy);
-					bounceClip.play();
-				} else if (collider != null) { // we hit a brick
-					vy = Math.abs(vy);
-					remove(collider);
-					nBricks -= 1;
-					bounceClip.play();
-				}
-				if (nBricks == 0) {
-					showMessage("YOU WIN!");
-					break;
-				}
+				bounceClip.play();
+			} else if (collider != null) { // we hit a brick
+				vy = -Math.abs(vy);
+				remove(collider);
+				nBricks -= 1;
+				bounceClip.play();
+			}
+			// bounce downwards if we hit an object above
+			collider = getCollidingObjectTop();
+			if (collider == PADDLE) {
+				vy = Math.abs(vy);
+				bounceClip.play();
+			} else if (collider != null) { // we hit a brick
+				vy = Math.abs(vy);
+				remove(collider);
+				nBricks -= 1;
+				bounceClip.play();
+			}
+			if (nBricks == 0) {
+				showMessage("YOU WIN!");
+				break;
 			}
 		}
 	}
