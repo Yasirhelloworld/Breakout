@@ -131,6 +131,13 @@ public class Breakout extends GraphicsProgram {
 		updateLivesRemaining();
 	}
 	
+	/**
+	 * 
+	 */
+	public void mousePressed(MouseEvent e) {
+		println("mouse was pressed");
+	}
+	
 	/** 
 	 * Runs the main game program
 	 */
@@ -138,12 +145,14 @@ public class Breakout extends GraphicsProgram {
 		int nBricks = NBRICKS_PER_ROW * NBRICK_ROWS;
 		int nLives = NLIVES_INITIAL;		
 		
-		/* Main animation loop */
+		/* Main game loop */
 		while (true) {
 			if (livesRemaining == 0) {
 				showMessage("GAME OVER");
 				break;
 			}
+			// (hopefully) freeze until we get a mouseclick event
+			
 			// initialise ball object
 			initBall(BALL_X_INITIAL, BALL_Y_INITIAL);
 			// kick the ball off with some initial velocity
@@ -202,9 +211,6 @@ public class Breakout extends GraphicsProgram {
 		}
 	}
 	
-	private void animationLoop() {
-		
-	}
 	/**
 	 * Iterate over the bottom two corners of the ball hit box and see if 
 	 * we hit an object
