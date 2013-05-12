@@ -135,12 +135,6 @@ public class Breakout extends GraphicsProgram {
 	 * Runs the main game program
 	 */
 	private void runGame() {
-		// initialise ball object
-		initBall(BALL_X_INITIAL, BALL_Y_INITIAL);
-		// kick the ball off with some initial velocity
-		vy = BALL_VY_INITIAL;
-		vx = rgen.nextDouble(1.0, 3.0);
-		if (rgen.nextBoolean(0.5)) vx = -vx;
 		int nBricks = NBRICKS_PER_ROW * NBRICK_ROWS;
 		int nLives = NLIVES_INITIAL;		
 		
@@ -150,6 +144,12 @@ public class Breakout extends GraphicsProgram {
 				showMessage("GAME OVER");
 				break;
 			}
+			// initialise ball object
+			initBall(BALL_X_INITIAL, BALL_Y_INITIAL);
+			// kick the ball off with some initial velocity
+			vy = BALL_VY_INITIAL;
+			vx = rgen.nextDouble(1.0, 3.0);
+			if (rgen.nextBoolean(0.5)) vx = -vx;
 			while (true) {
 				BALL.move(vx, vy);
 				pause(PAUSE_TIME);
