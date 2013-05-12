@@ -152,9 +152,9 @@ public class Breakout extends GraphicsProgram {
 			if (collider == PADDLE) {
 				vy = -Math.abs(vy);
 				/* if ball hits edge of paddle from which ball is coming, also bounce x */
-				if (BALL.getX() - PADDLE.getX() > PADDLE_WIDTH / 4) { //right hand side of paddle
+				if (((BALL.getX() + BALL_RADIUS) - (PADDLE.getX() + PADDLE_WIDTH / 2)) > PADDLE_WIDTH / 4) { //right hand side of paddle
 					vx = Math.abs(vx);
-				} else if (BALL.getX() - PADDLE.getX() < -PADDLE_WIDTH / 4) { //left hand side of paddle
+				} else if (((BALL.getX() + BALL_RADIUS) - (PADDLE.getX() + PADDLE_WIDTH / 2)) < -PADDLE_WIDTH / 4) { //left hand side of paddle
 					vx = -Math.abs(vx);
 				}
 				bounceClip.play();
