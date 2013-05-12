@@ -65,7 +65,7 @@ public class Breakout extends GraphicsProgram {
 	
 /** Message box dimensions and font style */
 	private GRect messageBox;
-	private GRect messageLabel; // make these classwide objects as we only ever want one of each
+	private GRect messageText; // make these classwide objects as we only ever want one of each
 	private static final int MESSAGE_WIDTH = 200;
 	private static final int MESSAGE_HEIGHT = 100;
 	private static final Font MESSAGE_FONT = new Font("Sans", Font.PLAIN, 18);
@@ -364,11 +364,11 @@ public class Breakout extends GraphicsProgram {
 	 * prints a label centered to the screen indicating to the the user that the game is over (or won)
 	 */
 	private void showMessage(String message) {
-		GRect messageBox = new GRect((APPLICATION_WIDTH - MESSAGE_WIDTH) / 2, (APPLICATION_HEIGHT - MESSAGE_HEIGHT) / 2, MESSAGE_WIDTH, MESSAGE_HEIGHT);
+		messageBox = new GRect((APPLICATION_WIDTH - MESSAGE_WIDTH) / 2, (APPLICATION_HEIGHT - MESSAGE_HEIGHT) / 2, MESSAGE_WIDTH, MESSAGE_HEIGHT);
 		messageBox.setFillColor(Color.LIGHT_GRAY);
 		messageBox.setFilled(true);
 		add(messageBox);
-		GLabel messageText = new GLabel(message);
+		messageText = new GLabel(message);
 		messageText.setFont(MESSAGE_FONT);
 		double xLabel = (APPLICATION_WIDTH - messageText.getWidth()) / 2;
 		double yLabel = (APPLICATION_HEIGHT + messageText.getHeight()) / 2 + MESSAGE_FUDGE_FACTOR; // the fudge factor is to make it look more centered
